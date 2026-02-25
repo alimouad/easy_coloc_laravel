@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
+        'flatshare_id',
+        'reputation_score',
+        'is_banned',
+        'colocation_role',
     ];
 
     /**
@@ -43,6 +47,48 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'colocation_role' => 'string',
+            'is_banned' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the flatshare that the user belongs to.
+     */
+    public function flatshare()
+    {
+        return $this->belongsTo(Flatshare::class);
+    }
+
+    /**
+     * Get the expenses paid by the user.
+     */
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'payer_id');
+    }
+
+    /**
+     * Get the settlements where user is the debtor.
+     */
+    public function debts()
+    {
+        return $this->hasMany(Settlement::class, 'debtor_id');
+    }
+
+    /**
+     * Get the settlements where user is the creditor.
+     */
+    public function credits()
+    {
+        return $this->hasMany(Settlement::class, 'creditor_id');
+    }
+
+    /**
+     * Get the invitations sent by the user.
+     */
+    public function sentInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'inviter_id');
     }
 }
