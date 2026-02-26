@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,6 +16,7 @@ class AuthController extends Controller
     {
         return view('pages.auth.register');
     }
+
     public function submitLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -26,26 +27,30 @@ class AuthController extends Controller
 
         return redirect()->back()->with('error', 'Invalid credentials');
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->logout();
-        return redirect()->route('login')->with('success', 'Logout successful');
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()
+            ->route('auth.login')
+            ->with('success', 'Logout successful');
     }
     public function submitRegister(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $validatedData['name'],
+            'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
         ]);
 
         return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
     }
-    
 }

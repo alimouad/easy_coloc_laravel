@@ -16,43 +16,28 @@ class Flatshare extends Model
      */
     protected $fillable = ['owner_id', 'name', 'invite_token', 'status'];
 
-   
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'status' => 'string',
         ];
     }
-
-     public function owner()
+    public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
-    /**
-     * Get the users that belong to the flatshare.
-     */
+
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'flatshare_id');
     }
 
-    /**
-     * Get the expenses for the flatshare.
-     */
+
     public function expenses()
     {
         return $this->hasMany(Expense::class);
     }
 
-    /**
-     * Get the invitations for the flatshare.
-     */
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
