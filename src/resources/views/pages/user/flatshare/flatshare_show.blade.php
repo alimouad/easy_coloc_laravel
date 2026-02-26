@@ -1,0 +1,114 @@
+@extends('layouts.userLayout')
+
+@section('title', $flatshare->name . ' | Ecosystem')
+
+@section('content')
+<main class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+    
+    <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+            <div class="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">
+                <a href="{{ route('user.home') }}" class="hover:text-black transition">Dashboard</a>
+                <span>/</span>
+                <span class="text-black">Ecosystem Detail</span>
+            </div>
+            <h2 class="text-5xl font-black tracking-tighter uppercase text-gray-900 leading-none">
+                {{ $flatshare->name }}
+            </h2>
+        </div>
+
+        <div class="bg-black p-6 rounded-[2.5rem] text-white flex items-center space-x-6 shadow-2xl relative overflow-hidden group">
+            <div class="absolute -right-4 -top-4 w-20 h-20 bg-[#D9FF40] opacity-10 blur-2xl group-hover:opacity-20 transition-opacity"></div>
+            <div class="relative z-10">
+                <p class="text-[9px] font-black text-[#D9FF40] uppercase tracking-widest">Active Token</p>
+                <p class="text-xl font-mono font-black tracking-tighter">{{ $flatshare->invite_token }}</p>
+            </div>
+            <button onclick="copyToken('{{ $flatshare->invite_token }}')" class="h-10 w-10 bg-zinc-800 rounded-xl flex items-center justify-center hover:bg-[#D9FF40] hover:text-black transition-all active:scale-90">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-[3.5rem] p-10 border border-gray-100 shadow-sm">
+                <div class="flex items-center justify-between mb-10">
+                    <h3 class="text-2xl font-black tracking-tighter uppercase">Resident Directory</h3>
+                    <span class="bg-gray-100 text-gray-500 text-[10px] font-black px-3 py-1 rounded-full uppercase italic">4 Verified Nodes</span>
+                </div>
+
+                <div class="space-y-4">
+                    @foreach($flatshare->users as $member)
+                    <div class="flex items-center justify-between p-4 rounded-3xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gray-100 overflow-hidden border-2 border-white shadow-sm ring-1 ring-gray-100 group-hover:ring-[#D9FF40] transition-all">
+                                <img src="https://i.pravatar.cc/150?u={{ $member }}" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-black text-gray-900 tracking-tight uppercase text-sm">Resident Node 0{{ $member }}</h4>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Joined Dec 2025</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-green-100 text-green-600 text-[9px] font-black px-2 py-0.5 rounded uppercase">Active</span>
+                            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 hover:text-rose-500 transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-zinc-950 p-10 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-[#D9FF40] opacity-5 blur-[100px]"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-12 h-12 bg-[#D9FF40] rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#D9FF40]/10">
+                        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black tracking-tighter uppercase mb-2">Invite Resident</h3>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-relaxed mb-8">Authorizing new nodes into the ecosystem requires email validation.</p>
+
+                    <form action="{{ route('flatshare.invite', $flatshare->id) }}" method="POST" class="space-y-4">
+                        @csrf
+                        <div class="relative">
+                            <input type="email" name="email" placeholder="resident@email.com" required
+                                class="w-full bg-zinc-900 border-2 border-zinc-800 rounded-2xl p-4 text-xs font-bold focus:bg-zinc-800 focus:border-[#D9FF40] transition-all outline-none text-white">
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#D9FF40] text-black py-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-[#D9FF40]/10 hover:bg-white transition-all active:scale-95">
+                            Send Secure Link
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6">Security Settings</h4>
+                <div class="space-y-3">
+                    <button class="w-full text-left px-5 py-3 rounded-xl hover:bg-gray-50 text-xs font-bold text-gray-700 flex justify-between items-center transition">
+                        <span>Regenerate Token</span>
+                        <svg class="w-4 h-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                    <button class="w-full text-left px-5 py-3 rounded-xl hover:bg-rose-50 text-xs font-bold text-rose-600 flex justify-between items-center transition">
+                        <span>Archive Coloc</span>
+                        <svg class="w-4 h-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function copyToken(text) {
+        navigator.clipboard.writeText(text);
+        alert('Token copied to clipboard: ' + text);
+    }
+</script>
+@endsection

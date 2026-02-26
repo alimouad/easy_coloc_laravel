@@ -14,11 +14,9 @@ class Flatshare extends Model
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'invite_token',
-        'status',
-    ];
+    protected $fillable = ['owner_id', 'name', 'invite_token', 'status'];
+
+   
 
     /**
      * Get the attributes that should be cast.
@@ -32,6 +30,10 @@ class Flatshare extends Model
         ];
     }
 
+     public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
     /**
      * Get the users that belong to the flatshare.
      */

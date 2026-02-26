@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('flatshares', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('owner_id')->constrained('users')->onDelete('cascade'); // The Creator
             $table->string('name');
             $table->string('invite_token')->unique();
             $table->enum('status', ['ACTIVE', 'CANCELLED'])->default('ACTIVE');
