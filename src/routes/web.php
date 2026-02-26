@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FlatshareController;
+use App\Models\Invitation;
+use App\Http\Controllers\InvitationController;
 
 Route::middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -23,5 +25,7 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('home');
     Route::resource('flatshare', FlatshareController::class);
     Route::get('/flatshares/{id}', [FlatshareController::class, 'show'])->name('flatshare.show');
-    Route::post('/flatshares/{id}/invite', [FlatshareController::class, 'invite'])->name('flatshare.invite');
+    Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
+    Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
+    Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
 });

@@ -136,11 +136,6 @@
                                 class="w-full bg-[#D9FF40] text-black py-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-[#D9FF40]/10 hover:bg-white transition-all active:scale-95">
                                 Send Secure Link
                             </button>
-                            @error('email')
-                                <p class="text-[10px] font-black uppercase text-rose-500 mt-2 ml-1">
-                                    Error: Resident node not found in database.
-                                </p>
-                            @enderror
                         </form>
                     </div>
                 </div>
