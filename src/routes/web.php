@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FlatshareController;
 use App\Models\Invitation;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\AdminController;
 
 Route::middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -28,4 +29,10 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
     Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
+});
+
+Route::middleware(['auth'])->name('admin.')->group(function () {
+    Route::get('/admin/home', [AdminController::class, 'home'])->name('home');
+    Route::patch('/admin/{user}/ban', [AdminController::class, 'ban'])->name('user.ban');
+    Route::patch('/admin/{user}/unban', [AdminController::class, 'unban'])->name('user.unban');
 });
