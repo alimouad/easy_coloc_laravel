@@ -31,8 +31,12 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
 });
 
-Route::middleware(['auth'])->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:ADMIN'])->name('admin.')->group(function () {
     Route::get('/admin/home', [AdminController::class, 'home'])->name('home');
     Route::patch('/admin/{user}/ban', [AdminController::class, 'ban'])->name('user.ban');
     Route::patch('/admin/{user}/unban', [AdminController::class, 'unban'])->name('user.unban');
+    Route::get('/admin/flatshares/{id}', [FlatshareController::class, 'showAdmin'])->name('flatshares.show');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/admin/flatshares', [FlatshareController::class, 'index'])->name('flatshares.index');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
 });

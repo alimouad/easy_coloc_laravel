@@ -10,12 +10,25 @@ use Illuminate\Support\Str;
 class FlatshareController extends Controller
 {
 
+    public function index()
+    {
+        $flatshares = Flatshare::withCount('users')->latest()->get();
+        return view('pages.admin.flatshares.flatshares_index', compact('flatshares'));
+    }
+    
     public function show($id)
     {
 
         $flatshare = Flatshare::with(['users', 'owner'])->findOrFail($id);
 
         return view('pages.user.flatshare.flatshare_show', compact('flatshare'));
+    }
+    public function showAdmin($id)
+    {
+
+        $flatshare = Flatshare::with(['users', 'owner'])->findOrFail($id);
+
+        return view('pages.admin.flatshares.flatshare_show', compact('flatshare'));
     }
 
 

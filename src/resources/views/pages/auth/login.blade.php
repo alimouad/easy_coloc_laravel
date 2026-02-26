@@ -12,7 +12,7 @@
                 </svg>
             </div>
             <div>
-                <h2 class="text-2xl font-black tracking-tighter text-gray-900 uppercase leading-none">DarColoc</h2>
+                <h2 class="text-2xl font-black tracking-tighter text-gray-900 uppercase leading-none">EasyColoc</h2>
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Shared Living Network</p>
             </div>
         </div>

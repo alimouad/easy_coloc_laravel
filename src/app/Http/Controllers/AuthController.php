@@ -22,6 +22,9 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (auth()->attempt($credentials)) {
+            if(auth()->user()->role === 'ADMIN') {
+                return redirect()->route('admin.home')->with('success', 'Login successful');
+            }
             return redirect()->route('user.home')->with('success', 'Login successful');
         }
 

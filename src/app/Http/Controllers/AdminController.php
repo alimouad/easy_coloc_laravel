@@ -10,26 +10,33 @@ use App\Models\Invitation;
 class AdminController extends Controller
 {
     //
-    public function home()
-    {
+  public function home()
+{
+    // Global Metrics (Immune to limits)
+    $usersCount = User::count();
+    $flatsharesCount = Flatshare::count();
+    $invitationsCount = Invitation::count();
 
-        $usersCount = User::count();
-        $flatsharesCount = Flatshare::count();
-        $invitationsCount = Invitation::count();
 
-        $users = User::with('flatshare')->latest()->paginate(10);
+    $users = User::with('flatshare')
+        ->latest()
+        ->limit(3)
+        ->get();
 
-        // Fetch all ecosystems
-        $flatshares = Flatshare::withCount('users')->latest()->get();
+    
+    $flatshares = Flatshare::withCount('users')
+        ->latest()
+        ->limit(3)
+        ->get();
 
-        return view('pages.admin.home', compact(
-            'usersCount',
-            'users',
-            'flatshares',
-            'flatsharesCount',
-            'invitationsCount'
-        ));
-    }
+    return view('pages.admin.home', compact(
+        'usersCount', 
+        'users', 
+        'flatshares', 
+        'flatsharesCount', 
+        'invitationsCount'
+    ));
+}
     public function ban(User $user)
     {
         $user->update(['is_banned' => true]);
