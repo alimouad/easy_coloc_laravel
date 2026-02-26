@@ -3,8 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Flatshare;
+use Illuminate\Support\Str;
+
 
 class FlatshareController extends Controller
 {
-    //
+
+    public function show($id)
+    {
+
+        $flatshare = Flatshare::with(['users', 'owner'])->findOrFail($id);
+
+        return view('pages.user.flatshare.flatshare_show', compact('flatshare'));
+    }
+
+
+
+    public function store(Request $request)
+    {
+        if (auth()->user()->flatshare_id) {
+            return back()->withErrors(['db' => 'You are already a member of a colocation. Terminate current session first.']);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:flatshares,name',
+        ]);
+        $flatshare = Flatshare::create([
+            'owner_id' => auth()->id(),
+            'name' => $request->name,
+            'invite_token' => 'EC-' . strtoupper(Str::random(8)),
+        ]);
+
+        // Link the owner immediately
+        auth()->user()->update(['flatshare_id' => $flatshare->id, 'colocation_role' => 'OWNER']);
+
+        return redirect()->route('user.home')->with('success', 'Ecosystem Protocol Initialized.');
+    }
 }
