@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Flatshare;
 use Illuminate\Support\Str;
+use App\Models\Category;
 
 
 class FlatshareController extends Controller
@@ -18,10 +19,11 @@ class FlatshareController extends Controller
     
     public function show($id)
     {
+        $categories = Category::all();
 
         $flatshare = Flatshare::with(['users', 'owner'])->findOrFail($id);
 
-        return view('pages.user.flatshare.flatshare_show', compact('flatshare'));
+        return view('pages.user.flatshare.flatshare_show', compact('flatshare', 'categories'));
     }
     public function showAdmin($id)
     {

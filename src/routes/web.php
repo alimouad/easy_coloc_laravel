@@ -9,6 +9,7 @@ use App\Models\Invitation;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenseController;
 
 Route::middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
     Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index');
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/expenses', ExpenseController::class);
+    Route::get('/flatshares/{id}/expenses', [ExpenseController::class, 'show'])->name('flatshare.expenses.index');
 });
 
 Route::middleware(['auth', 'role:ADMIN'])->name('admin.')->group(function () {

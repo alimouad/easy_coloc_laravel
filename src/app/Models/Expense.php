@@ -18,6 +18,7 @@ class Expense extends Model
         'flatshare_id',
         'category_id',
         'payer_id',
+        'user_id',
         'title',
         'amount',
     ];
@@ -32,6 +33,10 @@ class Expense extends Model
         return [
             'amount' => 'decimal:2',
         ];
+    }
+    public function participant()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

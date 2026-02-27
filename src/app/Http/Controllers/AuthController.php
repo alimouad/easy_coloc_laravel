@@ -54,6 +54,6 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+        return redirect()->route('auth.login')->with('success', 'Registration successful. Please log in.');
     }
 }

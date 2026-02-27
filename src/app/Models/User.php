@@ -84,6 +84,22 @@ class User extends Authenticatable
         return $this->hasMany(Settlement::class, 'creditor_id');
     }
 
+    public function getDebtsAttribute()
+    {
+        // Amount I owe to other nodes
+        return $this->hasMany(Expense::class, 'user_id')
+            ->whereColumn('user_id', '!=', 'payer_id')
+            ->sum('amount');
+    }
+
+    public function getCreditsAttribute()
+    {
+        // Amount other nodes owe to me
+        return Expense::where('payer_id', $this->id)
+            ->whereColumn('user_id', '!=', 'payer_id')
+            ->sum('amount');
+    }
+
     /**
      * Get the invitations sent by the user.
      */
