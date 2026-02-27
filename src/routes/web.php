@@ -8,6 +8,7 @@ use App\Http\Controllers\FlatshareController;
 use App\Models\Invitation;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 
 Route::middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -29,6 +30,8 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
     Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
+    Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index');
+    Route::resource('/categories', CategoryController::class);
 });
 
 Route::middleware(['auth', 'role:ADMIN'])->name('admin.')->group(function () {

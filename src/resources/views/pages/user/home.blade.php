@@ -116,41 +116,59 @@
                 </div>
             </div>
         @endforeach
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-12 gap-8">
-            <div class="space-y-2">
-                <div
-                    class="inline-flex items-center space-x-2 bg-white px-3 py-1 rounded-full border border-gray-100 shadow-sm">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest italic">Live Network
-                        Access</span>
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16 gap-12">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-white px-3 py-1 rounded-full border border-gray-100 shadow-sm">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest italic">Live Network
+                            Access</span>
+                    </div>
+                    <h2 class="text-7xl font-black tracking-tighter uppercase text-gray-900 leading-[0.85]">
+                        Shared <br> <span class="text-gray-200">Collocation.</span>
+                    </h2>
                 </div>
-                <h2 class="text-5xl font-black tracking-tighter uppercase text-gray-900 leading-none">
-                    Shared <br> <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600">Collocation.</span>
-                </h2>
-            </div>
 
-            <div class="flex gap-4">
-                <div
-                    class="bg-black p-6 rounded-[2rem] text-white flex flex-col justify-between w-40 h-32 shadow-2xl transition-transform hover:scale-105">
-                    <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Net Balance</span>
-                    <span class="text-2xl font-black tracking-tighter">14,200<span
-                            class="text-xs ml-1 text-[#D9FF40]">MAD</span></span>
-                </div>
-                <div
-                    class="bg-white p-6 rounded-[2rem] border border-gray-200 flex flex-col justify-between w-40 h-32 shadow-sm transition-transform hover:scale-105">
-                    <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Reputation</span>
-                    <div class="flex items-end justify-between">
-                        <span class="text-2xl font-black tracking-tighter italic">4.95</span>
-                        <div
-                            class="w-8 h-8 rounded-full bg-[#D9FF40] flex items-center justify-center shadow-lg shadow-[#D9FF40]/20">
-                            <svg class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
+
+            </div>
+            <div class="flex flex-col gap-5">
+                <div class="flex gap-6">
+                    <div
+                        class="bg-black p-8 rounded-[3rem] text-white flex flex-col justify-between w-48 h-40 shadow-2xl transition-transform hover:rotate-2 border border-white/10">
+                        <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Net Balance</span>
+                        <span class="text-3xl font-black tracking-tighter italic">14,200<span
+                                class="text-xs ml-1 text-[#D9FF40]">MAD</span></span>
+                    </div>
+
+                    <div
+                        class="bg-white p-8 rounded-[3rem] border border-gray-200 flex flex-col justify-between w-48 h-40 shadow-sm transition-transform hover:-rotate-2">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Reputation</span>
+                        <div class="flex items-end justify-between">
+                            <span class="text-3xl font-black tracking-tighter italic">4.95</span>
+                            <div
+                                class="w-10 h-10 rounded-2xl bg-[#D9FF40] flex items-center justify-center shadow-lg shadow-[#D9FF40]/20 border border-black/5">
+                                <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                <button onclick="openCategoryModal()"
+                    class="group flex items-center space-x-4 px-6 py-3 border-2 border-black rounded-2xl hover:bg-black transition-all active:scale-95 shadow-xl shadow-black/5">
+                    <div
+                        class="w-6 h-6 bg-black group-hover:bg-[#D9FF40] rounded-lg flex items-center justify-center transition-colors">
+                        <svg class="w-4 h-4 text-[#D9FF40] group-hover:text-black transition-colors" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[11px] font-black uppercase tracking-[0.2em] text-black group-hover:text-white transition-colors italic w-fill">Initialize_Category</span>
+                </button>
             </div>
         </div>
 
@@ -261,8 +279,6 @@
             @endif
 
         </div>
-
-        </div>
     </main>
 
     <div id="colocModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 transition-all">
@@ -316,8 +332,102 @@
             </form>
         </div>
     </div>
+    <div id="categoryModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-md" onclick="closeCategoryModal()"></div>
+
+        <div
+            class="relative bg-white w-full max-w-lg rounded-[3.5rem] shadow-[0_40px_120px_rgba(0,0,0,0.3)] border border-black/5 overflow-hidden transition-all transform scale-100">
+
+            <div class="p-10 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
+                <div>
+                    <p
+                        class="text-[9px] font-black text-[#D9FF40] bg-black px-2 py-0.5 inline-block uppercase tracking-widest mb-2 italic">
+                        Protocol: Node_Setup</p>
+                    <h3 class="text-3xl font-black uppercase tracking-tighter italic">Init Category</h3>
+                </div>
+                <button onclick="closeCategoryModal()"
+                    class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-black hover:text-white transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form action="{{ route('user.categories.store') }}" method="POST" class="p-10 space-y-8">
+                @csrf
+
+                <div class="space-y-3">
+                    <label class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 pl-2">Label
+                        Identity</label>
+                    <input type="text" name="name" required placeholder="e.g. PREMIUM_FLATS"
+                        class="w-full bg-gray-50 border-2 border-transparent focus:border-black focus:bg-white rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest outline-none transition-all">
+                </div>
+
+                <div class="space-y-3">
+                    <label class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 pl-2">Infrastructure
+                        Icon</label>
+                    <div class="grid grid-cols-4 gap-4">
+                        @php
+                            $icons = ['home', 'office-building', 'academic-cap', 'user-group'];
+                        @endphp
+                        @foreach ($icons as $iconName)
+                            <label class="cursor-pointer">
+                                <input type="radio" name="icon" value="{{ $iconName }}" class="peer hidden"
+                                    {{ $loop->first ? 'checked' : '' }}>
+                                <div
+                                    class="aspect-square bg-gray-50 border-2 border-transparent rounded-2xl flex items-center justify-center text-gray-400 peer-checked:border-black peer-checked:bg-white peer-checked:text-black transition-all group">
+                                    <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        @if ($iconName == 'home')
+                                            <path
+                                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        @endif
+                                        @if ($iconName == 'office-building')
+                                            <path
+                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        @endif
+                                        @if ($iconName == 'academic-cap')
+                                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                            <path
+                                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                        @endif
+                                        @if ($iconName == 'user-group')
+                                            <path
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        @endif
+                                    </svg>
+                                </div>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit"
+                        class="w-full bg-black text-white py-5 rounded-3xl text-[11px] font-black uppercase tracking-[0.3em] hover:bg-[#D9FF40] hover:text-black transition-all shadow-xl shadow-black/10 active:scale-[0.97]">
+                        Confirm_Infrastructure_Node
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
+        function openCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Lock scroll
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Unlock scroll
+        }
+
         function openModal() {
             document.getElementById('colocModal').classList.remove('hidden');
         }

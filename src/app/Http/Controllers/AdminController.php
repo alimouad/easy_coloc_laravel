@@ -12,7 +12,7 @@ class AdminController extends Controller
     //
   public function home()
 {
-    // Global Metrics (Immune to limits)
+    
     $usersCount = User::count();
     $flatsharesCount = Flatshare::count();
     $invitationsCount = Invitation::count();
