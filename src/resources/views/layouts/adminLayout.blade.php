@@ -7,6 +7,7 @@
     <title>Admin Terminal | @yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -19,9 +20,10 @@
 
 
     @include('partials.topBarAdmin')
+    @include('partials.flashMessage')
     <main class="max-w-[1600px] mx-auto px-12 py-16">
 
-       @yield('content')
+        @yield('content')
     </main>
 
 </body>

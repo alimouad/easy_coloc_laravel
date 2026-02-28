@@ -62,6 +62,7 @@ class ExpenseController extends Controller
             }
         });
 
-        return back()->with('status', 'EXPENSE_NODES_SYNCED');
+
+        return back()->with('success', "Expense created successfully.");
     }
 }
