@@ -6,6 +6,7 @@ use App\Models\Expense;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Flatshare;
 
 class ExpenseController extends Controller
@@ -13,6 +14,7 @@ class ExpenseController extends Controller
     //
     public function show($id)
     {
+        $categories = Category::all();
         $flatshare = Flatshare::with(['users', 'expenses.category', 'expenses.payer', 'expenses.participant'])->findOrFail($id);
 
         // Calculate balances per user
@@ -30,13 +32,12 @@ class ExpenseController extends Controller
                 'debts' => $debts
             ];
         });
-
-        return view('pages.user.expense.expense_view', compact('flatshare', 'userBalances'));
+        return view('pages.user.expense.expense_view', compact('flatshare', 'userBalances', 'categories'));
     }
 
     public function store(Request $request)
     {
-        // 1. DATA VALIDATION
+
         $validated = $request->validate([
             'title'        => 'required|string|max:255',
             'amount'       => 'required|numeric|min:0.01',

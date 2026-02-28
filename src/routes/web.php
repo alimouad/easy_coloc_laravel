@@ -10,6 +10,7 @@ use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SettlementController;
 
 Route::middleware(['guest'])->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::resource('/categories', CategoryController::class);
     Route::resource('/expenses', ExpenseController::class);
     Route::get('/flatshares/{id}/expenses', [ExpenseController::class, 'show'])->name('flatshare.expenses.index');
+    Route::post('/expenses/{expense}/settle', [SettlementController::class, 'settle'])->name('expenses.settle');
 });
 
 Route::middleware(['auth', 'role:ADMIN'])->name('admin.')->group(function () {
