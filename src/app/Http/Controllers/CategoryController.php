@@ -15,6 +15,10 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        if (auth()->user()->is_banned) {
+            return back()->withErrors(['db' => 'Your account has been suspended. You cannot perform this action.']);
+        }
+        
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
             'icon' => 'nullable|string|max:255',

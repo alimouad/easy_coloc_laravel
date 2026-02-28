@@ -37,6 +37,9 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
+        if (auth()->user()->is_banned) {
+            return back()->withErrors(['db' => 'Your account has been suspended. You cannot perform this action.']);
+        }
 
         $validated = $request->validate([
             'title'        => 'required|string|max:255',

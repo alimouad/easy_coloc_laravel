@@ -21,7 +21,7 @@
 
     @include('partials.topBarAdmin')
     @include('partials.flashMessage')
-    <main class="max-w-[1600px] mx-auto px-12 py-16">
+    <main class="max-w-[1600px] mx-auto px-12 py-18">
 
         @yield('content')
     </main>

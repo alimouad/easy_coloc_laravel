@@ -52,6 +52,10 @@ class FlatshareController extends Controller
 
     public function store(Request $request)
     {
+        if (auth()->user()->is_banned) {
+            return back()->withErrors(['db' => 'Your account has been suspended. You cannot perform this action.']);
+        }
+        
         if (auth()->user()->flatshare_id) {
             return back()->withErrors(['db' => 'You are already a member of a colocation. Terminate current session first.']);
         }

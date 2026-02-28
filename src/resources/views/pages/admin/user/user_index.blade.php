@@ -68,17 +68,29 @@
                         @endif
                     </td>
                     <td class="px-10 py-8 text-center">
-                        <span class="inline-flex px-3 py-1 rounded-lg border-2 {{ $user->is_banned ? 'border-rose-500/20 text-rose-500' : 'border-[#D9FF40]/20 text-black' }} text-[9px] font-black uppercase italic">
-                            {{ $user->is_banned ? 'Banned' : 'Authorized' }}
-                        </span>
+                        @if($user->role === 'ADMIN')
+                            <span class="inline-flex px-3 py-1 rounded-lg border-2 border-black/20 text-[#D9FF40] bg-black text-[9px] font-black uppercase italic">
+                                System Admin
+                            </span>
+                        @else
+                            <span class="inline-flex px-3 py-1 rounded-lg border-2 {{ $user->is_banned ? 'border-rose-500/20 text-rose-500' : 'border-[#D9FF40]/20 text-black' }} text-[9px] font-black uppercase italic">
+                                {{ $user->is_banned ? 'Banned' : 'Authorized' }}
+                            </span>
+                        @endif
                     </td>
                     <td class="px-10 py-8 text-right">
-                        <form action="{{ route($user->is_banned ? 'admin.user.unban' : 'admin.user.ban', $user->id) }}" method="POST">
-                            @csrf @method('PATCH')
-                            <button class="text-[10px] font-black uppercase {{ $user->is_banned ? 'text-black' : 'text-rose-500' }} hover:underline underline-offset-8 decoration-2 italic tracking-widest transition-all">
-                                {{ $user->is_banned ? 'Restore_Access' : 'Terminate_Node' }}
-                            </button>
-                        </form>
+                        @if($user->role === 'ADMIN')
+                            <span class="text-[10px] font-black uppercase text-gray-300 italic tracking-widest">
+                                Protected_Node
+                            </span>
+                        @else
+                            <form action="{{ route($user->is_banned ? 'admin.user.unban' : 'admin.user.ban', $user->id) }}" method="POST">
+                                @csrf @method('PATCH')
+                                <button class="text-[10px] font-black uppercase {{ $user->is_banned ? 'text-black' : 'text-rose-500' }} hover:underline underline-offset-8 decoration-2 italic tracking-widest transition-all">
+                                    {{ $user->is_banned ? 'Restore_Access' : 'Terminate_Node' }}
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
