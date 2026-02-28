@@ -48,10 +48,13 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        $isFirstUser = User::count() === 0;
+
         $user = User::create([
             'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
+            'role' => $isFirstUser ? 'ADMIN' : 'USER',
         ]);
 
         return redirect()->route('auth.login')->with('success', 'Registration successful. Please log in.');
