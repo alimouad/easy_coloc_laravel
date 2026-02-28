@@ -21,6 +21,7 @@ class User extends Authenticatable
         'full_name',
         'email',
         'password',
+        'role',
         'flatshare_id',
         'reputation_score',
         'is_banned',
