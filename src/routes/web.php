@@ -27,12 +27,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->name('user.')->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('home');
+    Route::get('/flatshares/available', [FlatshareController::class, 'available'])->name('flatshare.available');
     Route::resource('flatshare', FlatshareController::class);
     Route::get('/flatshares/{id}', [FlatshareController::class, 'show'])->name('flatshare.show');
     Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
     Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
-    Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/expenses', ExpenseController::class);
     Route::get('/flatshares/{id}/expenses', [ExpenseController::class, 'show'])->name('flatshare.expenses.index');

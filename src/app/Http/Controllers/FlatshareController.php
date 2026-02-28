@@ -16,6 +16,21 @@ class FlatshareController extends Controller
         $flatshares = Flatshare::withCount('users')->latest()->get();
         return view('pages.admin.flatshares.flatshares_index', compact('flatshares'));
     }
+
+    public function available()
+    {
+        // Get all flatshares except the one the user is already in
+        $flatshares = Flatshare::with(['users', 'owner'])
+            ->withCount('users')
+            ->when(auth()->user()->flatshare_id, function ($query) {
+                $query->where('id', '!=', auth()->user()->flatshare_id);
+            })
+            ->where('status', 'ACTIVE')
+            ->latest()
+            ->get();
+        
+        return view('pages.user.flatshare.available_flatshares', compact('flatshares'));
+    }
     
     public function show($id)
     {

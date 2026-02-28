@@ -137,7 +137,7 @@
                     <div
                         class="bg-black p-8 rounded-[3rem] text-white flex flex-col justify-between w-48 h-40 shadow-2xl transition-transform hover:rotate-2 border border-white/10">
                         <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Net Balance</span>
-                        <span class="text-3xl font-black tracking-tighter italic">14,200<span
+                        <span class="text-3xl font-black tracking-tighter italic">{{ auth()->user()->net_balance }}<span
                                 class="text-xs ml-1 text-[#D9FF40]">MAD</span></span>
                     </div>
 
@@ -145,7 +145,7 @@
                         class="bg-white p-8 rounded-[3rem] border border-gray-200 flex flex-col justify-between w-48 h-40 shadow-sm transition-transform hover:-rotate-2">
                         <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Reputation</span>
                         <div class="flex items-end justify-between">
-                            <span class="text-3xl font-black tracking-tighter italic">4.95</span>
+                            <span class="text-3xl font-black tracking-tighter italic">{{ auth()->user()->reputation_score }}</span>
                             <div
                                 class="w-10 h-10 rounded-2xl bg-[#D9FF40] flex items-center justify-center shadow-lg shadow-[#D9FF40]/20 border border-black/5">
                                 <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
