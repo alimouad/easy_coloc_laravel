@@ -137,8 +137,8 @@
                     <div
                         class="bg-black p-8 rounded-[3rem] text-white flex flex-col justify-between w-48 h-40 shadow-2xl transition-transform hover:rotate-2 border border-white/10">
                         <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Net Balance</span>
-                        <span class="text-3xl font-black tracking-tighter italic">{{ auth()->user()->net_balance }}<span
-                                class="text-xs ml-1 text-[#D9FF40]">MAD</span></span>
+                        <span class="text-3xl font-black tracking-tighter italic {{ auth()->user()->net_balance > 0 ? 'text-emerald-400' : (auth()->user()->net_balance < 0 ? 'text-rose-400' : 'text-white') }}">{{ auth()->user()->net_balance >= 0 ? '+' : '' }}{{ number_format(auth()->user()->net_balance, 2) }}<span
+                            class="text-xs ml-1 {{ auth()->user()->net_balance > 0 ? 'text-emerald-300' : (auth()->user()->net_balance < 0 ? 'text-rose-300' : 'text-[#D9FF40]') }}">MAD</span></span>
                     </div>
 
                     <div

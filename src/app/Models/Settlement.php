@@ -50,3 +50,4 @@ class Settlement extends Model
         return $this->belongsTo(User::class, 'creditor_id');
     }
 }
+    

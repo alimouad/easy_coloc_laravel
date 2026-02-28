@@ -8,14 +8,14 @@
         <div class="relative mb-20">
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#D9FF40]/10 rounded-full blur-[120px] pointer-events-none"></div>
             
-            <div class="relative flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b-8 border-black pb-12">
+            <div class="relative flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b-5 border-black pb-12">
                 <div class="max-w-3xl">
                     <div class="inline-flex items-center space-x-3 bg-black text-[#D9FF40] px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.4em] mb-8 italic rounded-full shadow-2xl">
                         <span class="w-2.5 h-2.5 bg-[#D9FF40] rounded-full animate-ping"></span>
                         <span>Protocol // Discovery_Scan_Active</span>
                     </div>
-                    <h1 class="text-2xl lg:text-[6rem] font-black tracking-[ -0.05em] uppercase text-black leading-[0.75] italic">
-                        Node <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600">Stream.</span>
+                    <h1 class="text-2xl lg:text-[4rem] font-black tracking-[ -0.05em] uppercase text-black leading-[0.75] italic">
+                        Available <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600">Collocation.</span>
                     </h1>
                 </div>
                 
