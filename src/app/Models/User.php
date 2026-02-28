@@ -101,6 +101,11 @@ class User extends Authenticatable
             ->sum('amount');
     }
 
+    public function getNetBalanceAttribute()
+    {
+        return round((float) $this->credits - (float) $this->debts, 2);
+    }
+
     /**
      * Get the invitations sent by the user.
      */

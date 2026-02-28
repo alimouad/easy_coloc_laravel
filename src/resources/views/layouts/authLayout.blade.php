@@ -14,6 +14,7 @@
         rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -43,12 +44,16 @@
     @stack('styles')
 </head>
 
-<body class="bg-slate-50 font-sans min-h-screen flex p-12">
+<body class="bg-slate-50 font-sans p-6">
     @include('partials.flashMessage')
+    <div class="min-h-screen flex">
+        @yield('content')
 
-    @yield('content')
+        @stack('scripts')
+    </div>
 
-    @stack('scripts')
+
+
 </body>
 
 </html>

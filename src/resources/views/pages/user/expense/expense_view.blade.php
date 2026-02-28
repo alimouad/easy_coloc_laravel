@@ -5,24 +5,54 @@
 @section('content')
     <main class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
         <div class="space-y-16">
-            <div class="space-y-4">
-                <div class="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-gray-400">
-                    <a href="{{ route('user.home') }}" class="hover:text-black transition">Dashboard</a>
-                    <span>/</span>
-                    <span class="text-black italic">Ecosystem Detail</span>
+            <div class="space-y-12">
+                <div class="flex items-center space-x-3 text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">
+                    <a href="{{ route('user.home') }}" class="hover:text-black transition flex items-center group">
+                        <span
+                            class="w-1.5 h-1.5 bg-gray-200 group-hover:bg-black rounded-full mr-2 transition-colors"></span>
+                        DASHBOARD_ROOT
+                    </a>
+                    <span class="text-gray-200">/</span>
+                    <span class="text-black italic bg-[#D9FF40] px-2 py-0.5 rounded-md">ECOSYSTEM_MANIFEST_v2</span>
                 </div>
 
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-gray-100 pb-12">
-                    <div>
-                        <h2 class="text-7xl font-black tracking-tighter uppercase text-black leading-[0.85] italic">
-                            <span class="text-gray-200">Balance.</span>
+                <div
+                    class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 border-b-4 border-black pb-14 relative">
+                    <div
+                        class="absolute -left-12 bottom-4 text-[12rem] font-black text-gray-50/50 -z-10 select-none pointer-events-none tracking-tighter uppercase italic">
+                        DATA
+                    </div>
+
+                    <div class="relative">
+                        <div
+                            class="inline-flex items-center space-x-2 bg-black text-[#D9FF40] px-3 py-1 text-[8px] font-black uppercase tracking-[0.4em] mb-4 italic">
+                            <span class="w-1.5 h-1.5 bg-[#D9FF40] rounded-full animate-pulse"></span>
+                            <span>Active_Node: {{ strtoupper($flatshare->name) }}</span>
+                        </div>
+                        <h2
+                            class="text-8xl lg:text-7xl font-black tracking-[-0.05em] uppercase text-black leading-[0.8] italic">
+                            Node <br> <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-200">Balance.</span>
                         </h2>
                     </div>
 
-                    <button onclick="openExpenseModal()"
-                        class="px-8 py-5 bg-black text-white text-[11px] font-black uppercase tracking-[0.3em] hover:bg-[#D9FF40] hover:text-black transition-all shadow-2xl active:scale-95 rounded-2xl italic">
-                        Initialize_New_Expense
-                    </button>
+                    <div class="flex flex-col items-end gap-6">
+                        
+
+                        <button onclick="openExpenseModal()"
+                            class="group relative px-10 py-6 bg-black text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#D9FF40] hover:text-black transition-all shadow-[0_25px_60px_rgba(0,0,0,0.15)] active:scale-95 rounded-[1.5rem] italic overflow-hidden">
+                            <div class="relative z-10 flex items-center">
+                                <svg class="w-4 h-4 mr-3 transition-transform group-hover:rotate-90" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Initialize_Expense_Entry
+                            </div>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity">
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -171,7 +201,8 @@
                 <button onclick="closeExpenseModal()"
                     class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-black hover:text-[#D9FF40] transition-all">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
