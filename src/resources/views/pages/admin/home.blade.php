@@ -25,6 +25,16 @@
             </div>
         </div>
 
+        <div class="flex gap-6">
+            <a href="{{ route('user.home') }}"
+               class="flex items-center gap-3 px-8 py-4 bg-black text-[#D9FF40] border-2 border-black rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-[#D9FF40] hover:text-black transition-all shadow-lg shadow-black/10 active:scale-95">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Switch to User View</span>
+            </a>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div class="lg:col-span-8 bg-white border border-gray-100 rounded-[3.5rem] p-10 shadow-sm flex flex-col">
                 <div class="flex items-center justify-between mb-10">
