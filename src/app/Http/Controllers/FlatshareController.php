@@ -28,10 +28,10 @@ class FlatshareController extends Controller
             ->where('status', 'ACTIVE')
             ->latest()
             ->get();
-        
+
         return view('pages.user.flatshare.available_flatshares', compact('flatshares'));
     }
-    
+
     public function show($id)
     {
         $categories = Category::all();
@@ -55,7 +55,7 @@ class FlatshareController extends Controller
         if (auth()->user()->is_banned) {
             return back()->withErrors(['db' => 'Your account has been suspended. You cannot perform this action.']);
         }
-        
+
         if (auth()->user()->flatshare_id) {
             return back()->withErrors(['db' => 'You are already a member of a colocation. Terminate current session first.']);
         }
@@ -73,5 +73,31 @@ class FlatshareController extends Controller
         auth()->user()->update(['flatshare_id' => $flatshare->id, 'colocation_role' => 'OWNER']);
 
         return redirect()->route('user.home')->with('success', 'Ecosystem Protocol Initialized.');
+    }
+
+    public function cancel(Flatshare $flatshare)
+    {
+        if (auth()->user()->is_banned) {
+            return back()->withErrors([
+                'db' => 'Your account has been suspended.'
+            ]);
+        }
+
+        if (auth()->id() !== $flatshare->owner_id) {
+            return back()->withErrors([
+                'db' => 'Only the owner can cancel this ecosystem.'
+            ]);
+        }
+
+        $flatshare->update(['status' => 'CANCELLED']);
+
+        $flatshare->users()->update([
+            'flatshare_id' => null,
+            'colocation_role' => null
+        ]);
+
+        return redirect()
+            ->route('user.home')
+            ->with('success', 'Ecosystem successfully terminated.');
     }
 }

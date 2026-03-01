@@ -19,6 +19,7 @@ class Flatshare extends Model
     protected function casts(): array
     {
         return [
+            'owner_id' => 'integer',
             'status' => 'string',
         ];
     }
