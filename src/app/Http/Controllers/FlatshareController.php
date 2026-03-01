@@ -100,4 +100,39 @@ class FlatshareController extends Controller
             ->route('user.home')
             ->with('success', 'Ecosystem successfully terminated.');
     }
+
+    public function leave(Flatshare $flatshare)
+    {
+        $user = auth()->user();
+
+        if ($user->is_banned) {
+            return back()->withErrors([
+                'db' => 'Your account has been suspended.'
+            ]);
+        }
+
+        if ($user->id === $flatshare->owner_id) {
+            return back()->withErrors([
+                'db' => 'Owner cannot leave. Use terminate instead.'
+            ]);
+        }
+
+        $netBalance = $user->net_balance;
+
+        if ($netBalance < 0) {
+            return back()->withErrors([
+                'db' => 'You cannot leave with negative balance. Please settle your debts first.'
+            ]);
+        }
+
+        // Remove user from flatshare
+        $user->update([
+            'flatshare_id' => null,
+            'colocation_role' => null
+        ]);
+
+        return redirect()
+            ->route('user.home')
+            ->with('success', 'Successfully left the ecosystem.');
+    }
 }

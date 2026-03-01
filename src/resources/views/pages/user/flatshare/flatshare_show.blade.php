@@ -20,39 +20,91 @@
 
             <div class="flex items-center gap-4">
 
-                <button onclick="openExpenseModal()"
-                    class="group h-[68px] flex items-center space-x-4 px-6 border-2 border-black rounded-[2rem] hover:bg-black transition-all active:scale-95 shadow-xl shadow-black/5 bg-white">
-                    <div
-                        class="w-8 h-8 bg-black group-hover:bg-[#D9FF40] rounded-xl flex items-center justify-center transition-colors">
-                        <svg class="w-4 h-4 text-[#D9FF40] group-hover:text-black transition-colors" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                    </div>
-                    <span
-                        class="text-[11px] font-black uppercase tracking-[0.2em] text-black group-hover:text-white transition-colors italic">Add_Expense</span>
-                </button>
+                <div class="flex flex-wrap items-center gap-6">
 
-                @if(auth()->id() === $flatshare->owner_id)
-                <button onclick="if(confirm('Are you sure you want to terminate this ecosystem? All members will be detached.')) { document.getElementById('cancelFlatshareForm').submit(); }"
-                    class="group h-[68px] flex items-center space-x-4 px-6 border-2 border-rose-500 rounded-[2rem] hover:bg-rose-500 transition-all active:scale-95 shadow-xl shadow-rose-500/20 bg-white">
-                    <div
-                        class="w-8 h-8 bg-rose-500 group-hover:bg-white rounded-xl flex items-center justify-center transition-colors">
-                        <svg class="w-4 h-4 text-white group-hover:text-rose-500 transition-colors" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </div>
-                    <span
-                        class="text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 group-hover:text-white transition-colors italic">Terminate</span>
-                </button>
-                
-                <form id="cancelFlatshareForm" action="{{ route('user.flatshare.cancel', $flatshare->id) }}" method="POST" class="hidden">
-                    @csrf @method('PATCH')
-                </form>
-                @endif
+                    {{-- PRIMARY_ACTION: INITIALIZE_EXPENSE --}}
+                    <button onclick="openExpenseModal()"
+                        class="group h-[72px] flex items-center space-x-5 px-8 bg-black rounded-[2.2rem] hover:bg-[#D9FF40] transition-all active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.15)] relative overflow-hidden">
+                        <div
+                            class="relative z-10 flex items-center space-x-4 text-white group-hover:text-black transition-colors">
+                            <div
+                                class="w-10 h-10 bg-[#D9FF40] group-hover:bg-black rounded-xl flex items-center justify-center transition-all shadow-lg">
+                                <svg class="w-5 h-5 text-black group-hover:text-[#D9FF40] transition-colors" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <span class="text-[11px] font-black uppercase tracking-[0.3em] italic">Add_Entry</span>
+                        </div>
+                        <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    </button>
+
+                    @if (auth()->id() === $flatshare->owner_id)
+                        {{-- OWNER_ONLY: TERMINATE_PROTOCOL --}}
+                        <button
+                            onclick="if(confirm('TERMINATION_SEQUENCE: Are you sure? All resident nodes will be detached.')) { document.getElementById('cancelFlatshareForm').submit(); }"
+                            class="group h-[72px] flex items-center px-8 border-2 border-rose-600 rounded-[2.2rem] hover:bg-rose-600 transition-all active:scale-95 shadow-[8px_8px_0px_0px_rgba(225,29,72,1)] hover:shadow-none bg-white">
+                            <div
+                                class="flex items-center space-x-4 text-rose-600 group-hover:text-white transition-colors italic">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                <span class="text-[11px] font-black uppercase tracking-[0.3em]">Terminate_Node</span>
+                            </div>
+                        </button>
+                        <form id="cancelFlatshareForm" action="{{ route('user.flatshare.cancel', $flatshare->id) }}"
+                            method="POST" class="hidden">
+                            @csrf @method('PATCH')
+                        </form>
+                    @else
+                        @if (auth()->user()->net_balance >= 0)
+                            {{-- MEMBER_ACTION: DETACH_NODE --}}
+                            <button
+                                onclick="if(confirm('LEAVE_SEQUENCE: Confirm detachment from ecosystem?')) { document.getElementById('leaveFlatshareForm').submit(); }"
+                                class="group h-[72px] flex items-center px-8 border-2 border-orange-500 rounded-[2.2rem] hover:bg-orange-500 transition-all active:scale-95 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] hover:shadow-none bg-white">
+                                <div
+                                    class="flex items-center space-x-4 text-orange-500 group-hover:text-white transition-colors italic">
+                                    <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span class="text-[11px] font-black uppercase tracking-[0.3em]">Detach_Node</span>
+                                </div>
+                            </button>
+                            <form id="leaveFlatshareForm" action="{{ route('user.flatshare.leave', $flatshare->id) }}"
+                                method="POST" class="hidden">
+                                @csrf @method('PATCH')
+                            </form>
+                        @else
+                            {{-- SECURITY_LOCK: SETTLEMENT_REQUIRED --}}
+                            <div
+                                class="h-[72px] flex items-center space-x-5 px-8 border-2 border-gray-200 rounded-[2.2rem] bg-gray-50/50 cursor-not-allowed group relative overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-rose-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                </div>
+                                <div class="relative z-10 flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 bg-gray-200 group-hover:bg-rose-500 rounded-xl flex items-center justify-center transition-colors shadow-inner">
+                                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                    </div>
+                                    <div class="text-left leading-tight">
+                                        <span
+                                            class="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-rose-600 italic">Detachment_Locked</span>
+                                        <span
+                                            class="block text-[8px] font-bold text-gray-300 uppercase group-hover:text-rose-400">Settle_Debt_Registry_First</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+                </div>
 
                 <div
                     class="bg-black h-[88px] px-8 rounded-[2rem] text-white flex items-center space-x-6 shadow-2xl relative overflow-hidden group border border-white/5">
@@ -142,7 +194,8 @@
                                     @if (auth()->id() === $flatshare->owner_id && auth()->id() !== $member->id)
                                         <button
                                             class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 hover:text-rose-500 transition-all hover:bg-rose-50">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                                 </path>

@@ -34,6 +34,10 @@ Route::middleware(['auth'])->name('user.')->group(function () {
         '/flatshares/{flatshare}/cancel',
         [FlatshareController::class, 'cancel']
     )->name('flatshare.cancel');
+    Route::patch(
+        '/flatshares/{flatshare}/leave',
+        [FlatshareController::class, 'leave']
+    )->name('flatshare.leave');
     Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
     Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');
