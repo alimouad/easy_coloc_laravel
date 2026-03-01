@@ -39,12 +39,20 @@ class AdminController extends Controller
 }
     public function ban(User $user)
     {
+        if ($user->role === 'ADMIN') {
+            return back()->withErrors(['error' => 'Cannot ban admin users. Protected node.']);
+        }
+        
         $user->update(['is_banned' => true]);
         return back()->with('status', "NODE_{$user->id}_TERMINATED");
     }
 
     public function unban(User $user)
     {
+        if ($user->role === 'ADMIN') {
+            return back()->withErrors(['error' => 'Cannot modify admin users. Protected node.']);
+        }
+        
         $user->update(['is_banned' => false]);
         return back()->with('status', "NODE_{$user->id}_RESTORED");
     }

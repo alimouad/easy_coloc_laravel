@@ -30,6 +30,10 @@ Route::middleware(['auth'])->name('user.')->group(function () {
     Route::get('/flatshares/available', [FlatshareController::class, 'available'])->name('flatshare.available');
     Route::resource('flatshare', FlatshareController::class);
     Route::get('/flatshares/{id}', [FlatshareController::class, 'show'])->name('flatshare.show');
+    Route::patch(
+        '/flatshares/{flatshare}/cancel',
+        [FlatshareController::class, 'cancel']
+    )->name('flatshare.cancel');
     Route::post('/flatshares/{id}/invite', [InvitationController::class, 'invite'])->name('flatshare.invite');
     Route::post('/invitations/{id}/accept', [InvitationController::class, 'acceptInvite'])->name('invitation.accept');
     Route::delete('/invitations/{id}/decline', [InvitationController::class, 'declineInvite'])->name('invitation.decline');

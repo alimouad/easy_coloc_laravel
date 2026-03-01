@@ -34,6 +34,26 @@
                         class="text-[11px] font-black uppercase tracking-[0.2em] text-black group-hover:text-white transition-colors italic">Add_Expense</span>
                 </button>
 
+                @if(auth()->id() === $flatshare->owner_id)
+                <button onclick="if(confirm('Are you sure you want to terminate this ecosystem? All members will be detached.')) { document.getElementById('cancelFlatshareForm').submit(); }"
+                    class="group h-[68px] flex items-center space-x-4 px-6 border-2 border-rose-500 rounded-[2rem] hover:bg-rose-500 transition-all active:scale-95 shadow-xl shadow-rose-500/20 bg-white">
+                    <div
+                        class="w-8 h-8 bg-rose-500 group-hover:bg-white rounded-xl flex items-center justify-center transition-colors">
+                        <svg class="w-4 h-4 text-white group-hover:text-rose-500 transition-colors" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </div>
+                    <span
+                        class="text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 group-hover:text-white transition-colors italic">Terminate</span>
+                </button>
+                
+                <form id="cancelFlatshareForm" action="{{ route('user.flatshare.cancel', $flatshare->id) }}" method="POST" class="hidden">
+                    @csrf @method('PATCH')
+                </form>
+                @endif
+
                 <div
                     class="bg-black h-[88px] px-8 rounded-[2rem] text-white flex items-center space-x-6 shadow-2xl relative overflow-hidden group border border-white/5">
                     <div
