@@ -62,4 +62,12 @@ class Expense extends Model
     {
         return $this->belongsTo(User::class, 'payer_id');
     }
+
+    /**
+     * Get the user who owes money (debtor).
+     */
+    public function debtor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

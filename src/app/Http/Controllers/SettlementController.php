@@ -17,12 +17,19 @@ class SettlementController extends Controller
 
         try {
             DB::transaction(function () use ($expense) {
+                // Create settlement record
                 Settlement::create([
                     'debtor_id'   => $expense->user_id,
                     'creditor_id' => $expense->payer_id,
                     'amount'      => $expense->amount,
                     'is_paid'     => true, 
                 ]);
+                
+                // Increment debtor's reputation for paying the settlement
+                $debtor = $expense->debtor;
+                $debtor->increment('reputation_score');
+                
+                // Delete the expense after settlement
                 $expense->delete();
             });
 

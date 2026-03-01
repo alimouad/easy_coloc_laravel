@@ -107,6 +107,24 @@ class User extends Authenticatable
     }
 
     /**
+     * Calculate reputation penalties for unpaid expenses older than specified days.
+     * This can be called by a scheduled job or manually to enforce penalties.
+     */
+    public function applyReputationPenalty($daysOld = 7)
+    {
+        $oldUnpaidExpenses = $this->hasMany(Expense::class, 'user_id')
+            ->whereColumn('user_id', '!=', 'payer_id')
+            ->where('created_at', '<', now()->subDays($daysOld))
+            ->count();
+        
+        if ($oldUnpaidExpenses > 0) {
+            $this->decrement('reputation_score', $oldUnpaidExpenses);
+        }
+        
+        return $oldUnpaidExpenses;
+    }
+
+    /**
      * Get the invitations sent by the user.
      */
     public function sentInvitations()
