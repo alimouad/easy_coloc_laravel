@@ -19,7 +19,9 @@ class ExpenseController extends Controller
 
         // Calculate balances per user
         $userBalances = $flatshare->users->map(function ($user) use ($flatshare) {
-            // Credits: What others owe this user (where user is payer but NOT the debtor)
+//             كتحسب شحال كل user خاصو ياخذ وشحال خاصو يخلص
+
+// كتحسب الفرق
             $credits = $flatshare->expenses->where('payer_id', $user->id)->where('user_id', '!=', $user->id)->sum('amount');
 
             // Debts: What this user owes others (where user is debtor but NOT the payer)

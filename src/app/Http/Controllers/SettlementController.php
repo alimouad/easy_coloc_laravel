@@ -24,12 +24,9 @@ class SettlementController extends Controller
                     'amount'      => $expense->amount,
                     'is_paid'     => true, 
                 ]);
-                
-                // Increment debtor's reputation for paying the settlement
                 $debtor = $expense->debtor;
                 $debtor->increment('reputation_score');
                 
-                // Delete the expense after settlement
                 $expense->delete();
             });
 
