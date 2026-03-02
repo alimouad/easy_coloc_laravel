@@ -19,7 +19,6 @@ class FlatshareController extends Controller
 
     public function available()
     {
-        // Get all flatshares except the one the user is already in
         $flatshares = Flatshare::with(['users', 'owner'])
             ->withCount('users')
             ->when(auth()->user()->flatshare_id, function ($query) {
@@ -100,6 +99,7 @@ class FlatshareController extends Controller
             ->route('user.home')
             ->with('success', 'Ecosystem successfully terminated.');
     }
+
 
     public function leave(Flatshare $flatshare)
     {
