@@ -99,13 +99,6 @@
                                 </div>
                             </div>
 
-                            <div class="mt-auto pt-8">
-                                <a href="{{ route('user.flatshare.show', $flatshare->id) }}"
-                                    class="group/btn relative flex items-center justify-center w-full bg-white border-4 border-black text-black text-center py-6 rounded-[2rem] font-black text-[11px] uppercase tracking-[0.4em] hover:bg-black hover:text-[#D9FF40] transition-all active:scale-95 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:shadow-none italic">
-                                    Access_Protocol
-                                    <svg class="w-4 h-4 ml-3 group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 @endforeach
