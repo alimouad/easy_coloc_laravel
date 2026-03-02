@@ -22,6 +22,10 @@
                 Flatshares
             </a>
 
+            <a href="{{ route('user.profile') }}"
+                class="px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition {{ request()->routeIs('user.profile') ? 'bg-white shadow-sm text-black' : 'text-gray-400 hover:text-black' }}">
+                Profile
+            </a>
 
             {{-- <a href="{{ route('user.history') }}"
                 class="px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition {{ request()->routeIs('user.flatshare.*') ? 'bg-white shadow-sm text-black' : 'text-gray-400 hover:text-black' }}">
@@ -44,11 +48,11 @@
 
 
 
-            <div
+            <a href="{{ route('user.profile') }}" title="View Profile"
                 class="h-11 w-11 rounded-2xl bg-gray-200 overflow-hidden border-2 border-white shadow-sm ring-1 ring-gray-100 hover:ring-[#D9FF40] transition-all cursor-pointer">
                 <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->full_name) }}&background=D9FF40&color=000"
                     class="w-full h-full object-cover">
-            </div>
+            </a>
             <form method="POST" action="{{ route('auth.logout') }}" class="inline">
                 @csrf
                 <button type="submit" title="Terminate Session"
