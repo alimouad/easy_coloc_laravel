@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->name('user.')->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('home');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/flatshares/available', [FlatshareController::class, 'available'])->name('flatshare.available');
     Route::resource('flatshare', FlatshareController::class);
     Route::get('/flatshares/{id}', [FlatshareController::class, 'show'])->name('flatshare.show');

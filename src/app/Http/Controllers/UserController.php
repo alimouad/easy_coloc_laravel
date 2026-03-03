@@ -26,4 +26,12 @@ class UserController extends Controller
 
         return view('pages.user.home', compact('myFlatshare', 'pendingInvites'));
     }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $myFlatshare = Flatshare::where('id', $user->flatshare_id)->first();
+        
+        return view('pages.user.profile', compact('user', 'myFlatshare'));
+    }
 }
